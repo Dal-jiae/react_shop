@@ -7,7 +7,7 @@ function MainPage({ fruit }) {
   const [fruitCount, setFruitCount] = useState(3); // 화면에 나오는 상품 수 설정하기 위한 초기값
   
   const visibleFruit = fruit.slice(0, fruitCount); // .slice(원하는 처음 인덱스 번호, 원하는 수만큼)
-  console.log(visibleFruit);
+  // console.log(visibleFruit);
 
   return(
     <>

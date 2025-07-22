@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import TabContent from "../components/TabContent";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/cartSlice";
+import { setWatched } from "../redux/watchedSlice";
 
 // 과일 정보 전체를 보냈기 때문에 
 function Detail({ fruit }) {
@@ -15,6 +16,8 @@ function Detail({ fruit }) {
   const [alert, setAlert] = useState(true);
   const [tabNumber, setTabNumber] = useState(0);
   const dispatch = useDispatch();
+
+
 
   const selectedFruit = fruit[id];
 
@@ -41,6 +44,33 @@ function Detail({ fruit }) {
   useEffect(()=>{
     console.log('useEffect 확인용 콘솔');
   }, [num])
+
+  useEffect(()=> {
+    // 방금 들어온 상품의 id를 로컬스토리지에 추가할 예정
+    let watched = localStorage.getItem('watched');
+    watched = JSON.parse(watched);
+
+    // includes : 해당 배열에 값이 있으면 true, 없으면 false
+    
+    // 이미 최근 본 상품이 3개일 때 새로운 걸 추가해야 하므로 기존 거 하나 지우고 추가
+    // 개수로만 삭제를 하니까 중복된 걸 보게 되면 문제가 생김
+    // 이미 들어 있는 거면 안 지워도 됨 => 없을 때만 삭제하면 된다. 
+    if( watched.length === 3 && !watched.includes(id) ) {
+      watched.pop(); // 배열 마지막 제거 함수는 pop
+    } 
+
+    watched = [id, ...watched]; // 새로운 상품 id 추가
+
+    // console.log('중복 제거 전', watched);
+    watched = new Set (watched); // 배열 내 중복 제거 
+    // console.log('중복 제거 후', watched);
+
+    // set은 배열이 아니기 때문에 중복 제거 후 다시 배열로 변환
+    watched = Array.from(watched);
+
+    localStorage.setItem('watched', JSON.stringify(watched));
+    dispatch( setWatched(watched) );
+  }, [])
 
   if(!selectedFruit) {
     return <div>해당 상품이 없습니다.</div>

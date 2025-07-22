@@ -7,7 +7,7 @@ function MainPage({ fruit }) {
   const [fruitCount, setFruitCount] = useState(3); // 화면에 나오는 상품 수 설정하기 위한 초기값
   
   const visibleFruit = fruit.slice(0, fruitCount); // .slice(원하는 처음 인덱스 번호, 원하는 수만큼)
-  console.log(visibleFruit);
+  // console.log(visibleFruit);
 
   return(
     <>
@@ -20,7 +20,7 @@ function MainPage({ fruit }) {
             // 과일 수만큼 반복을 돌리기 위해 fruit
             // 반복할 때마다 과일 배열에 있는 정보가 하나씩 들어간다.
             // fruit 배열을 돌면서 data라는 이름으로 하나씩 꺼냄
-            // 그 data를 <Card> 컴포넌트의 fr이라는 props로 전달
+            // 그 data를 <Card> 컴포넌트의 data라는 props로 전달
             visibleFruit.map((data,i) => {
               return (
                 <Card data={data} key={i}/>

@@ -41,7 +41,6 @@ function Header () {
             <Nav.Link onClick={()=> navigate(-1)}>Back</Nav.Link>
             <Nav.Link onClick={()=> navigate('/cart')}>Cart</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="/test">Test page</Nav.Link>
             <Link to="/test">테스트2</Link>
           </Nav>
 
